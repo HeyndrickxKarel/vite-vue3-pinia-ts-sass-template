@@ -1,25 +1,31 @@
+import { Task } from "@/models/task";
 import { defineStore } from "pinia";
 
 export const appStore = defineStore({
   id: "app",
   state: () => ({
-    rawTasks: [] as string[],
+    tasks: [] as Task[],
   }),
   getters: {
     hiddenTasks: (state: any) => {
-      return state.rawTasks.filter((t: string) =>
-        t.toLowerCase().includes("hidden")
+      return state.tasks.filter((t: Task) =>
+        t.description.toLowerCase().includes("hidden")
       );
     },
+    regularTasks: (state: any) => {
+      return state.tasks.filter((t: Task) =>
+        !t.description.toLowerCase().includes("hidden")
+      );
+    }
   },
   actions: {
-    addTask(task: string) {
-      this.rawTasks.push(task);
+    addTask(description: string) {
+      this.tasks.push({description: description, completed: false});
     },
-    removeTask(task: string) {
-      const index = this.rawTasks.findIndex((t: any) => t == task);
+    removeTask(task: Task) {
+      const index = this.tasks.findIndex((t: Task) => t == task);
       if (index > -1) {
-        this.rawTasks.splice(index, 1);
+        this.tasks.splice(index, 1);
       }
     },
   },

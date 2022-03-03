@@ -6,8 +6,9 @@
       <input type="text" v-model="taskValue" />
       <button class="button-green" :disabled="taskValue.length == 0" @click="addTask()">Toevoegen</button>
     </div>
-    <div class="list-item" v-for="task in app.hiddenTasks" :key="task">
-      {{ task }}
+    <div class="list-item" v-for="task in app.regularTasks" :key="task">
+      <input type="checkbox" id="checkbox" v-model="task.completed">
+      {{ task.description }}
       <button class="button-red" @click="removeTask(task)">
         Remove
       </button>
@@ -16,6 +17,7 @@
 </template>
 
 <script lang="ts">
+import { Task } from "@/models/task";
 import { setup, Options, Vue } from "vue-class-component";
 import { appStore } from '../stores/app'
 
@@ -29,7 +31,7 @@ export default class Home extends Vue {
    this.taskValue = "";
   }
 
-  removeTask(task: string){
+  removeTask(task: Task){
     this.app.removeTask(task);
   }
 }
@@ -37,7 +39,7 @@ export default class Home extends Vue {
 
 <style>
 .button-green {
-  background-color: olive;
+  background-color: goldenrod;
   color: white;
 }
 .button-red {
@@ -56,5 +58,4 @@ export default class Home extends Vue {
   border-radius: 0.25rem;
   margin: 10px 0px;
 }
-
 </style>
