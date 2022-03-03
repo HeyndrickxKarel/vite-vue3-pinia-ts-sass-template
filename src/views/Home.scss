@@ -1,0 +1,20 @@
+.button-primary {
+    background-color: $primary;
+    color: white;
+  }
+  .button-secondary {
+    background: indianred;
+    color: white;
+  }
+  .app-container {
+    padding: 3rem;
+    .input-container {
+      display: flex;
+      align-items: center;
+    }
+    .list-item {
+      border: 1px solid gainsboro;
+      border-radius: 0.25rem;
+      margin: 10px 0px;
+    }
+  }

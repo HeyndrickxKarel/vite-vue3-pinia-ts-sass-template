@@ -5,7 +5,7 @@
      <div class="list-item" v-for="task in app.hiddenTasks" :key="task">
       <input type="checkbox" id="checkbox" v-model="task.completed">
       {{ task.description }}
-      <button class="button-red" @click="removeTask(task)">
+      <button class="button-secondary" @click="removeTask(task)">
         Remove
       </button>
       </div>
