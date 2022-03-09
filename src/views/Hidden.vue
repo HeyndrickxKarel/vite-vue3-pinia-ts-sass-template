@@ -5,19 +5,14 @@
      <div class="list-item" v-for="task in app.hiddenTasks" :key="task">
       <input type="checkbox" id="checkbox" v-model="task.completed">
       {{ task.description }}
-      <button class="button-secondary" @click="removeTask(task)">
+      <button class="button-secondary" @click="app.removeTask(task)">
         Remove
       </button>
       </div>
   </div>
 </template>
 
-<script lang="ts">
-import { setup, Options, Vue } from "vue-class-component";
+<script setup lang="ts">
 import { appStore } from '../stores/app'
-
-@Options({})
-export default class Hidden extends Vue {
-  app = appStore();
-}
+const app = appStore();
 </script>

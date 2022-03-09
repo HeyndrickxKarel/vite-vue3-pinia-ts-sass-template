@@ -9,32 +9,26 @@
     <div class="list-item" v-for="task in app.regularTasks" :key="task">
       <input type="checkbox" id="checkbox" v-model="task.completed">
       {{ task.description }}
-      <button class="button-secondary" @click="removeTask(task)">
+      <button class="button-secondary" @click="app.removeTask(task)">
         Remove
       </button>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Task } from "@/models/task";
-import { setup, Options, Vue } from "vue-class-component";
+<script setup lang="ts">
+import { Task } from "../models/task";
 import { appStore } from '../stores/app'
+import { ref } from 'vue'
 
-@Options({})
-export default class Home extends Vue {
-  taskValue = "";
-  app = appStore();
+const taskValue = ref("");
+const app = appStore();
 
-  addTask(){
-   this.app.addTask(this.taskValue);
-   this.taskValue = "";
-  }
-
-  removeTask(task: Task){
-    this.app.removeTask(task);
-  }
+function addTask(){
+  app.addTask(taskValue.value);
+  taskValue.value = "";
 }
+
 </script>
 
 <style lang="scss">
